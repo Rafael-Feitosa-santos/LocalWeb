@@ -137,7 +137,7 @@ fun LoginScreen(navController: NavController) {
                     Icon(
                         imageVector = Icons.Default.Email,
                         contentDescription = "Icone de e-mail",
-                        tint = Color(color = 0xFF1E1E1E)
+                        tint = colorResource(id = br.com.localweb.R.color.icon_input)
                     )
                 },
                 colors = OutlinedTextFieldDefaults.colors(
@@ -177,7 +177,7 @@ fun LoginScreen(navController: NavController) {
                     Icon(
                         imageVector = Icons.Default.Lock,
                         contentDescription = "Ícone de Bloqueio",
-                        tint = Color(0xFF1E1E1E)
+                        tint = colorResource(id = br.com.localweb.R.color.icon_input)
                     )
                 },
                 colors = OutlinedTextFieldDefaults.colors(
@@ -212,7 +212,7 @@ fun LoginScreen(navController: NavController) {
                             imageVector = Icons.Default.Check,
                             contentDescription = "Checked",
                             tint = Color.Black,
-                            modifier = Modifier.size(16.dp)  // Tamanho do ícone
+                            modifier = Modifier.size(16.dp)
                         )
                     }
                 }
