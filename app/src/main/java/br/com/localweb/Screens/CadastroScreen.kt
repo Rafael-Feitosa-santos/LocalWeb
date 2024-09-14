@@ -36,6 +36,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -72,6 +73,8 @@ fun CadastroScreen(navController: NavHostController) {
 
     var isButtonPressedVoltar by remember { mutableStateOf(false) }
 
+    var confirmacaoSenhaState by remember { mutableStateOf("") }
+
     Column(
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -83,7 +86,7 @@ fun CadastroScreen(navController: NavHostController) {
             modifier = Modifier
                 .size(width = 900.dp, height = 190.dp),
             colors = CardDefaults.cardColors(
-                containerColor = Color(0xFFF90F0F),
+                containerColor = colorResource(id = br.com.localweb.R.color.background_black),
             ),
             shape = RoundedCornerShape(bottomEndPercent = 95),
         ) {
@@ -104,11 +107,11 @@ fun CadastroScreen(navController: NavHostController) {
 
         ) {
             Image(
-                painter = painterResource(id = br.com.localweb.R.drawable.local_web2),
+                painter = painterResource(id = br.com.localweb.R.drawable.localweb),
                 contentDescription = "Logo Local Web",
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
-                    .size(300.dp)
+                    .size(280.dp)
                     .offset(y = (-90).dp)
             )
 
@@ -124,8 +127,8 @@ fun CadastroScreen(navController: NavHostController) {
 
                 label = {
                     Text(
-                        text = "CPF",
-                        color = Color(color = 0xFF1E1E1E)
+                        text = "Nome",
+                        color = colorResource(id = br.com.localweb.R.color.background_black)
                     )
 
                 },
@@ -137,7 +140,7 @@ fun CadastroScreen(navController: NavHostController) {
                     Icon(
                         imageVector = Icons.Default.Person,
                         contentDescription = "Icone de Pessoa",
-                        tint = Color.White
+                        tint = colorResource(id = br.com.localweb.R.color.icon_input)
                     )
                 },
                 colors = OutlinedTextFieldDefaults.colors(
@@ -145,52 +148,15 @@ fun CadastroScreen(navController: NavHostController) {
                     focusedLabelColor = Color.White,
                 ),
                 placeholder = {
-                    Text(text = "Informe o CPF")
+                    Text(text = "Como podemos te chamar?")
                 }
             )
+
 
             OutlinedTextField(
                 modifier = Modifier
                     .padding(top = 14.dp)
-                    .offset(y = (-140).dp)
-                    .fillMaxWidth(),
-                value = telState,
-                onValueChange = {
-                    if (it.length <= tamanhoTel) telState = it
-
-                },
-
-                label = {
-                    Text(
-                        text = "Telefone",
-                        color = Color(color = 0xFF1E1E1E)
-                    )
-
-                },
-                shape = RoundedCornerShape(14.dp),
-                singleLine = true,
-                keyboardOptions = KeyboardOptions
-                    (keyboardType = KeyboardType.Number),
-                leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Default.Phone,
-                        contentDescription = "Icone de Telefone",
-                        tint = Color.White
-                    )
-                },
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedContainerColor = Color.White,
-                    focusedLabelColor = Color.White,
-                ),
-                placeholder = {
-                    Text(text = "Informe seu número")
-                }
-            )
-
-            OutlinedTextField(
-                modifier = Modifier
-                    .padding(top = 14.dp)
-                    .offset(y = (-135).dp)
+                    .offset(y = (-145).dp)
                     .fillMaxWidth(),
                 value = emailState,
                 onValueChange = {
@@ -200,7 +166,7 @@ fun CadastroScreen(navController: NavHostController) {
                 label = {
                     Text(
                         text = "E-mail",
-                        color = Color(color = 0xFF1E1E1E)
+                        color = colorResource(id = br.com.localweb.R.color.background_black)
                     )
 
                 },
@@ -211,8 +177,8 @@ fun CadastroScreen(navController: NavHostController) {
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Default.Email,
-                        contentDescription = "Icone de Telefone",
-                        tint = Color.White
+                        contentDescription = "Icone de E-mail",
+                        tint = colorResource(id = br.com.localweb.R.color.icon_input)
                     )
                 },
                 colors = OutlinedTextFieldDefaults.colors(
@@ -220,14 +186,14 @@ fun CadastroScreen(navController: NavHostController) {
                     focusedLabelColor = Color.White,
                 ),
                 placeholder = {
-                    Text(text = "Informe seu e-mail")
+                    Text(text = "exemplo@exemplo.com.br")
                 }
             )
 
             OutlinedTextField(
                 modifier = Modifier
                     .padding(top = 14.dp, bottom = 12.dp)
-                    .offset(y = (-135).dp)
+                    .offset(y = (-145).dp)
                     .fillMaxWidth(),
                 value = senhaState,
                 onValueChange = {
@@ -237,21 +203,21 @@ fun CadastroScreen(navController: NavHostController) {
                 label = {
                     Text(
                         text = "Senha",
-                        color = Color(color = 0xFF1E1E1E)
+                        color = colorResource(id = br.com.localweb.R.color.background_black)
                     )
 
                 },
                 shape = RoundedCornerShape(12.dp),
                 singleLine = true,
                 keyboardOptions = KeyboardOptions
-                    (keyboardType = KeyboardType.NumberPassword),
+                    (keyboardType = KeyboardType.Text),
                 visualTransformation =
                 PasswordVisualTransformation(),
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Default.Lock,
                         contentDescription = "Icone de Telefone",
-                        tint = Color.White
+                        tint = colorResource(id = br.com.localweb.R.color.icon_input)
                     )
                 },
                 colors = OutlinedTextFieldDefaults.colors(
@@ -263,11 +229,46 @@ fun CadastroScreen(navController: NavHostController) {
                 }
             )
 
+            OutlinedTextField(
+                modifier = Modifier
+                    .padding(top = 14.dp, bottom = 12.dp)
+                    .offset(y = (-155).dp)
+                    .fillMaxWidth(),
+                value = confirmacaoSenhaState,  // Utilizando a variável para confirmação de senha
+                onValueChange = {
+                    if (it.length <= tamanhoSenha) confirmacaoSenhaState = it
+                },
+                label = {
+                    Text(
+                        text = "Confirmar Senha",
+                        color = colorResource(id = br.com.localweb.R.color.background_black)
+                    )
+                },
+                shape = RoundedCornerShape(12.dp),
+                singleLine = true,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+                visualTransformation = PasswordVisualTransformation(),
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Lock,
+                        contentDescription = "Ícone de Confirmação de Senha",
+                        tint = colorResource(id = br.com.localweb.R.color.icon_input)
+                    )
+                },
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedContainerColor = Color.White,
+                    focusedLabelColor = Color.White,
+                ),
+                placeholder = {
+                    Text(text = "Confirme sua senha")
+                }
+            )
+
             Spacer(modifier = Modifier.height(9.dp))
 
             Button(
                 onClick = {
-                    isButtonPressed = !isButtonPressed  // Alterna o estado de clique
+                    isButtonPressed = !isButtonPressed
                     navController.navigate("login")
                 },
                 modifier = Modifier
@@ -279,15 +280,17 @@ fun CadastroScreen(navController: NavHostController) {
                     topEnd = 35.dp
                 ),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = if (isButtonPressed) Color.White else Color(color = 0xFFF90F0F)  // Muda a cor de fundo
+                    containerColor = if (isButtonPressed) Color.White else
+                        colorResource(id = br.com.localweb.R.color.color_botao)
                 ),
-                border = BorderStroke(2.dp, if (isButtonPressed) Color.Red else Color.Transparent)  // Adiciona a borda vermelha
+                border = BorderStroke(2.dp, if (isButtonPressed)
+                    colorResource(id = br.com.localweb.R.color.color_botao) else Color.Transparent)
             ) {
                 Text(
                     text = "Criar Conta",
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
-                    color = if (isButtonPressed) Color.Red else Color.White  // Muda a cor do texto
+                    color = if (isButtonPressed) colorResource(id = br.com.localweb.R.color.color_botao) else Color.White
                 )
             }
 
@@ -305,15 +308,15 @@ fun CadastroScreen(navController: NavHostController) {
                     topEnd = 35.dp
                 ),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = if (isButtonPressedVoltar) Color.White else Color(0xFFF90F0F)  // Muda a cor de fundo
+                    containerColor = if (isButtonPressedVoltar) Color.White else colorResource(id = br.com.localweb.R.color.color_botao)
                 ),
-                border = BorderStroke(2.dp, if (isButtonPressedVoltar) Color.Red else Color.Transparent)  // Adiciona a borda vermelha
+                border = BorderStroke(2.dp, if (isButtonPressedVoltar) colorResource(id = br.com.localweb.R.color.color_botao) else Color.Transparent)
             ) {
                 Text(
                     text = "Voltar",
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
-                    color = if (isButtonPressedVoltar) Color.Red else Color.White  // Muda a cor do texto
+                    color = if (isButtonPressedVoltar) colorResource(id = br.com.localweb.R.color.color_botao) else Color.White
                 )
             }
 

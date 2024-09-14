@@ -51,7 +51,6 @@ class MainActivity : ComponentActivity() {
                     ) {
                         composable("login") {
                             LoginScreen(navController)
-
                         }
                         composable("cadastro") {
                             CadastroScreen(navController)

@@ -252,7 +252,10 @@ fun LoginScreen(navController: NavController) {
             ) {
                 Text(
                     text = "ENTRAR",
-                    modifier = Modifier.padding(8.dp),
+                    modifier = Modifier
+                        .padding(8.dp)
+                        .border(BorderStroke
+                            (2.dp, colorResource(id = br.com.localweb.R.color.color_botao))),
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp,
                     color = if (isButtonPressed) colorResource(id = br.com.localweb.R.color.color_botao) else Color.White  // Muda a cor do texto
