@@ -231,7 +231,7 @@ fun LoginScreen(navController: NavController) {
 
             Button(
                 onClick = {
-                    isButtonPressed = !isButtonPressed  // Alterna o estado de clique
+                    isButtonPressed = !isButtonPressed
                     navController.navigate("tela inicial")
                 },
                 modifier = Modifier
@@ -243,16 +243,19 @@ fun LoginScreen(navController: NavController) {
                     topEnd = 35.dp
                 ),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = if (isButtonPressed) Color.White else Color(0xFFF90F0F)  // Muda a cor de fundo
+                    containerColor = if (isButtonPressed) Color.White else colorResource(id = br.com.localweb.R.color.color_botao)
                 ),
-                border = BorderStroke(2.dp, if (isButtonPressed) Color.Red else Color.Transparent)  // Adiciona a borda vermelha
+                border = BorderStroke(
+                    2.dp,
+                    if (isButtonPressed) colorResource(id = br.com.localweb.R.color.color_botao) else Color.Transparent
+                )
             ) {
                 Text(
                     text = "ENTRAR",
                     modifier = Modifier.padding(8.dp),
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp,
-                    color = if (isButtonPressed) Color.Red else Color.White  // Muda a cor do texto
+                    color = if (isButtonPressed) colorResource(id = br.com.localweb.R.color.color_botao) else Color.White  // Muda a cor do texto
                 )
             }
             Row(
@@ -267,12 +270,12 @@ fun LoginScreen(navController: NavController) {
                     text = "Não tem Conta? ",
                     fontWeight = FontWeight.Bold,
                     fontSize = 17.sp,
-                    color = Color(color = 0xFFF90F0F)
+                    color = colorResource(id = br.com.localweb.R.color.background_black)
 
                 )
                 Button(
                     onClick = {
-                        isSubscribed = !isSubscribed  // Alterna o estado de assinatura
+                        isSubscribed = !isSubscribed  // Alterna o estado de clique
                         navController.navigate("cadastro")
                     },
                     modifier = Modifier
@@ -280,18 +283,18 @@ fun LoginScreen(navController: NavController) {
                         .padding(start = 8.dp)
                         .align(Alignment.CenterVertically),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = if (isSubscribed) Color.Red else Color.White
+                        containerColor = if (isSubscribed) Color.White else colorResource(id = br.com.localweb.R.color.btn_vermelho)  // Fundo branco quando pressionado
                     ),
-                    border = BorderStroke(1.dp, Color.Red)
+                    border = BorderStroke(1.dp, Color.Red)  // Mantém a borda vermelha
                 ) {
                     Text(
                         text = "Cadastre-se",
                         fontSize = 17.sp,
                         fontWeight = FontWeight.Bold,
-                        color = if (isSubscribed) Color.White else Color(0xFFF90F0F)
+                        color = if (isSubscribed) colorResource(id = br.com.localweb.R.color.btn_vermelho) else Color.White  // Texto vermelho quando pressionado
                     )
-
                 }
+
             }
             Card(
                 modifier = androidx.compose.ui.Modifier
