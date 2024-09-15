@@ -20,6 +20,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import br.com.localweb.Screens.CadastroScreen
 import br.com.localweb.Screens.ConfirmacaoScreen
+import br.com.localweb.Screens.HomeScreen
 import br.com.localweb.Screens.LoginScreen
 import br.com.localweb.Screens.Mensagem_CadastroScreen
 import br.com.localweb.ui.theme.LocalWebTheme
@@ -52,7 +53,8 @@ class MainActivity : ComponentActivity() {
 
                     ) {
                         composable("login") {
-                            LoginScreen(navController)
+                            //LoginScreen(navController)
+                            HomeScreen(navController)
                         }
                         composable("cadastro") {
                             CadastroScreen(navController)
