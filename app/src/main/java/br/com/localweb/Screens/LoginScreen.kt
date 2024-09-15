@@ -251,9 +251,9 @@ fun LoginScreen(navController: NavController) {
                 )
             ) {
                 Text(
-                    text = "ENTRAR",
+                    text = "ENTRAR ",
                     modifier = Modifier
-                        .padding(8.dp)
+                        .padding(horizontal = 16.dp, vertical = 8.dp)
                         .border(BorderStroke
                             (2.dp, colorResource(id = br.com.localweb.R.color.color_botao))),
                     fontWeight = FontWeight.Bold,

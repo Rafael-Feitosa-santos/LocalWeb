@@ -19,7 +19,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -251,7 +250,7 @@ fun CadastroScreen(navController: NavHostController) {
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Default.Lock,
-                        contentDescription = "Ícone de Confirmação de Senha",
+                        contentDescription = "Ícone Senha",
                         tint = colorResource(id = br.com.localweb.R.color.icon_input)
                     )
                 },
@@ -266,43 +265,16 @@ fun CadastroScreen(navController: NavHostController) {
 
             Spacer(modifier = Modifier.height(9.dp))
 
-            Button(
-                onClick = {
-                    isButtonPressed = !isButtonPressed
-                    navController.navigate("login")
-                },
-                modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-                    .width(290.dp)
-                    .offset(y = (-115).dp),
-                shape = RoundedCornerShape(
-                    bottomStart = 35.dp,
-                    topEnd = 35.dp
-                ),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = if (isButtonPressed) Color.White else
-                        colorResource(id = br.com.localweb.R.color.color_botao)
-                ),
-                border = BorderStroke(2.dp, if (isButtonPressed)
-                    colorResource(id = br.com.localweb.R.color.color_botao) else Color.Transparent)
-            ) {
-                Text(
-                    text = "Criar Conta",
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = if (isButtonPressed) colorResource(id = br.com.localweb.R.color.color_botao) else Color.White
-                )
-            }
 
             Button(
                 onClick = {
                     isButtonPressedVoltar = !isButtonPressedVoltar  // Alterna o estado de clique
-                    navController.navigate("login")
+                    navController.navigate("confirmacao")
                 },
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
                     .width(290.dp)
-                    .offset(y = (-95).dp),
+                    .offset(y = (-135).dp),
                 shape = RoundedCornerShape(
                     bottomStart = 35.dp,
                     topEnd = 35.dp
@@ -313,8 +285,8 @@ fun CadastroScreen(navController: NavHostController) {
                 border = BorderStroke(2.dp, if (isButtonPressedVoltar) colorResource(id = br.com.localweb.R.color.color_botao) else Color.Transparent)
             ) {
                 Text(
-                    text = "Voltar",
-                    fontSize = 18.sp,
+                    text = "Próximo passo",
+                    fontSize = 24.sp,
                     fontWeight = FontWeight.Bold,
                     color = if (isButtonPressedVoltar) colorResource(id = br.com.localweb.R.color.color_botao) else Color.White
                 )
