@@ -19,17 +19,21 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -40,16 +44,69 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
-@OptIn(ExperimentalMaterial3Api::class)
+data class EmailItem(val sender: String, val subject: String, val preview: String, val time: String)
+
+enum class EmailTab { INBOX, TRASH }
+
 @Composable
 fun HomeScreen(navController: NavController) {
 
     var selectedIcon by remember { mutableStateOf("none") }
-
     var searchText by remember { mutableStateOf("") }
+    var selectedTab by remember { mutableStateOf(EmailTab.INBOX) }
+
+    // Lista de e-mails de exemplo (Caixa de Entrada)
+    var inboxEmails by remember {
+        mutableStateOf(
+            listOf(
+                EmailItem(
+                    "Cameron Williamson",
+                    "Reading Tutors",
+                    "Lorem ipsum dolor sit amet, consectetur...",
+                    "5s"
+                ),
+                EmailItem(
+                    "Jane Cooper",
+                    "Chemistry Tutors",
+                    "Lorem ipsum dolor sit amet, consectetur...",
+                    "20s"
+                ),
+                EmailItem(
+                    "Esther Howard",
+                    "Must be FigJam...",
+                    "Lorem ipsum dolor sit amet, consectetur...",
+                    "20s"
+                ),
+                EmailItem(
+                    "Jacob Jones",
+                    "Good morning John...",
+                    "Lorem ipsum dolor sit amet, consectetur...",
+                    "12h"
+                ),
+                EmailItem(
+                    "Jenny Wilson",
+                    "Please send asap...",
+                    "Lorem ipsum dolor sit amet, consectetur...",
+                    "1d"
+                ),
+                EmailItem(
+                    "Guy Hawkins",
+                    "Re: Retour devis",
+                    "Lorem ipsum dolor sit amet, consectetur...",
+                    "1d"
+                )
+            )
+        )
+    }
+
+    // Lista de e-mails excluídos
+    var trashEmails by remember { mutableStateOf(listOf<EmailItem>()) }
+
+    var selectedEmail by remember { mutableStateOf<EmailItem?>(null) }
 
     Box(
         modifier = Modifier
@@ -62,32 +119,76 @@ fun HomeScreen(navController: NavController) {
                 .height(90.dp),
         ) {
 
+
         }
+
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(colorResource(id = br.com.localweb.R.color.background_black))
-                .height(110.dp)
                 .align(Alignment.TopStart)
-                .offset(y = 135.dp)
-                .padding(start = 6.dp, end = 6.dp),
-
-            ) {
+                .offset(y = 129.dp)
+        ) {
             OutlinedTextField(
                 value = searchText,
                 onValueChange = { searchText = it },
-                label = { Text("Pequisar") },
-                shape = RoundedCornerShape(24.dp), // Apply rounded corners
+                label = { Text("Pesquisar") },
+                shape = RoundedCornerShape(24.dp),
                 modifier = Modifier
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
+                    .padding(top = 8.dp, start = 6.dp, end = 6.dp),
                 trailingIcon = {
                     Icon(
                         imageVector = Icons.Default.Search,
                         contentDescription = "Search Icon",
-                        tint = Color.Gray // Adjust the color if needed
+                        tint = Color.Gray
                     )
                 }
             )
+
+
+            // Abas para "Caixa de Entrada" e "Excluídos"
+            TabRow(selectedTabIndex = selectedTab.ordinal) {
+                Tab(
+                    selected = selectedTab == EmailTab.INBOX,
+                    onClick = { selectedTab = EmailTab.INBOX },
+                    text = { Text("Caixa de Entrada") }
+                )
+                Tab(
+                    selected = selectedTab == EmailTab.TRASH,
+                    onClick = { selectedTab = EmailTab.TRASH },
+                    text = { Text("Excluídos") }
+                )
+            }
+
+
+        }
+
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = 180.dp, start = 16.dp, end = 16.dp)
+                .offset(y = 98.dp)
+        ) {
+            val emailsToShow = if (selectedTab == EmailTab.INBOX) inboxEmails else trashEmails
+
+            items(emailsToShow) { email ->
+                EmailRow(
+                    email = email,
+                    isSelected = email == selectedEmail,
+                    onClick = { selectedEmail = email },
+                    onDelete = {
+                        if (selectedTab == EmailTab.INBOX) {
+                            inboxEmails = inboxEmails.toMutableList().also {
+                                it.remove(email)
+                                trashEmails = trashEmails + email
+                            }
+                        } else {
+                            trashEmails = trashEmails.toMutableList().also { it.remove(email) }
+                        }
+                    }
+                )
+            }
         }
 
         Column(
@@ -95,9 +196,9 @@ fun HomeScreen(navController: NavController) {
                 .fillMaxWidth()
                 .height(110.dp)
                 .background(colorResource(id = br.com.localweb.R.color.background_black))
-                .align(Alignment.BottomStart), // Aligns at the bottom
-            horizontalAlignment = Alignment.CenterHorizontally, // Centers icons horizontally
-            verticalArrangement = Arrangement.Center // Centers vertically within the Column
+                .align(Alignment.BottomStart),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -128,8 +229,37 @@ fun HomeScreen(navController: NavController) {
                 )
             }
         }
+    }
+}
 
-
+@Composable
+fun EmailRow(
+    email: EmailItem,
+    isSelected: Boolean,
+    onClick: () -> Unit,
+    onDelete: () -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp)
+            .background(if (isSelected) Color.LightGray else Color.Transparent)
+            .clickable(onClick = onClick),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .padding(end = 8.dp)
+        ) {
+            Text(text = email.sender, fontWeight = FontWeight.Bold)
+            Text(text = email.subject, fontWeight = FontWeight.SemiBold)
+            Text(text = email.preview, maxLines = 1, color = Color.Gray)
+        }
+        Text(text = email.time, color = Color.Gray)
+        IconButton(onClick = onDelete) {
+            Icon(imageVector = Icons.Default.Delete, contentDescription = "Delete Email")
+        }
     }
 }
 
@@ -145,11 +275,7 @@ fun AnimatedIcon(
     AnimatedContent(
         targetState = selectedIcon == iconName,
         transitionSpec = {
-            if (targetState) {
-                fadeIn() with fadeOut()
-            } else {
-                fadeIn() with fadeOut()
-            }
+            fadeIn() with fadeOut()
         }
     ) { isSelected ->
         Column(

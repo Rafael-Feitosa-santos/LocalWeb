@@ -53,8 +53,7 @@ class MainActivity : ComponentActivity() {
 
                     ) {
                         composable("login") {
-                            //LoginScreen(navController)
-                            HomeScreen(navController)
+                            LoginScreen(navController)
                         }
                         composable("cadastro") {
                             CadastroScreen(navController)
@@ -64,6 +63,9 @@ class MainActivity : ComponentActivity() {
                         }
                         composable("mensagem") {
                             Mensagem_CadastroScreen(navController)
+                        }
+                        composable("home"){
+                            HomeScreen(navController)
                         }
 
                     }

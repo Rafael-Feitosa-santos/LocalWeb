@@ -232,7 +232,7 @@ fun LoginScreen(navController: NavController) {
             Button(
                 onClick = {
                     isButtonPressed = !isButtonPressed
-                    navController.navigate("tela inicial")
+                    navController.navigate("home")
                 },
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
