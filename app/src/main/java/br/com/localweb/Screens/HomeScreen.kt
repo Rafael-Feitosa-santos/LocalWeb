@@ -209,7 +209,10 @@ fun HomeScreen(navController: NavController) {
                     contentDescription = "Email Icon",
                     selectedIcon = selectedIcon,
                     iconName = "email",
-                    onClick = { selectedIcon = "email" }
+                    onClick = {
+                        selectedIcon = "email"
+                        navController.navigate("home")
+                    }
                 )
 
                 AnimatedIcon(
@@ -217,7 +220,10 @@ fun HomeScreen(navController: NavController) {
                     contentDescription = "Calendar Icon",
                     selectedIcon = selectedIcon,
                     iconName = "calendar",
-                    onClick = { selectedIcon = "calendar" }
+                    onClick = {
+                        selectedIcon = "calendar"
+                        navController.navigate("calendario")
+                    }
                 )
 
                 AnimatedIcon(
