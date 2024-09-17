@@ -69,6 +69,8 @@ fun LoginScreen(navController: NavController) {
 
     var isButtonPressed by remember { mutableStateOf(false) }
 
+    var rememberPassword by remember { mutableStateOf(false) }
+
     Column(
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -220,7 +222,38 @@ fun LoginScreen(navController: NavController) {
                 Spacer(modifier = androidx.compose.ui.Modifier.width(8.dp))
 
                 Text(
-                    text = "Lembrar?",
+                    text = "Lembrar dados",
+                    color = Color.Black,
+                    fontWeight = FontWeight.Bold
+                )
+
+                Spacer(modifier = androidx.compose.ui.Modifier.width(16.dp))
+
+
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .size(20.dp)
+                        .border(BorderStroke(2.dp, Color.Black))
+                        .background(Color.White)
+                        .clickable {
+                            rememberPassword = !rememberPassword
+                        }
+                ) {
+                    if (rememberPassword) {
+                        Icon(
+                            imageVector = Icons.Default.Check,
+                            contentDescription = "Checked",
+                            tint = Color.Black,
+                            modifier = Modifier.size(16.dp)
+                        )
+                    }
+                }
+
+                Spacer(modifier = androidx.compose.ui.Modifier.width(8.dp))
+
+                Text(
+                    text = "Lembrar a senha?",
                     color = Color.Black,
                     fontWeight = FontWeight.Bold
                 )

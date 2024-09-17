@@ -209,10 +209,8 @@ fun HomeScreen(navController: NavController) {
                     contentDescription = "Email Icon",
                     selectedIcon = selectedIcon,
                     iconName = "email",
-                    onClick = {
-                        selectedIcon = "email"
-                        navController.navigate("home")
-                    }
+                    onClick = { selectedIcon = "email"
+                        navController.navigate("home")}
                 )
 
                 AnimatedIcon(
@@ -220,10 +218,8 @@ fun HomeScreen(navController: NavController) {
                     contentDescription = "Calendar Icon",
                     selectedIcon = selectedIcon,
                     iconName = "calendar",
-                    onClick = {
-                        selectedIcon = "calendar"
-                        navController.navigate("calendario")
-                    }
+                    onClick = { selectedIcon = "calendar"
+                    navController.navigate("calendario")}
                 )
 
                 AnimatedIcon(
@@ -239,9 +235,8 @@ fun HomeScreen(navController: NavController) {
 }
 
 @Composable
-fun EmailRow(
+fun Boolean.EmailRow(
     email: EmailItem,
-    isSelected: Boolean,
     onClick: () -> Unit,
     onDelete: () -> Unit
 ) {
@@ -249,7 +244,7 @@ fun EmailRow(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp)
-            .background(if (isSelected) Color.LightGray else Color.Transparent)
+            .background(if (this) Color.LightGray else Color.Transparent)
             .clickable(onClick = onClick),
         verticalAlignment = Alignment.CenterVertically
     ) {
