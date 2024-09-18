@@ -26,6 +26,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
@@ -116,9 +117,8 @@ fun HomeScreen(navController: NavController) {
             modifier = Modifier
                 .fillMaxWidth()
                 .background(colorResource(id = br.com.localweb.R.color.vermelho))
-                .height(90.dp),
+                .height(90.dp)
         ) {
-
 
         }
 
@@ -223,11 +223,13 @@ fun HomeScreen(navController: NavController) {
                 )
 
                 AnimatedIcon(
-                    icon = Icons.Default.Refresh,
-                    contentDescription = "Refresh Icon",
+                    icon = Icons.Default.ExitToApp,
+                    contentDescription = "Sair",
                     selectedIcon = selectedIcon,
                     iconName = "refresh",
-                    onClick = { selectedIcon = "refresh" }
+                    onClick = { selectedIcon = "refresh"
+                    navController.navigate("login")
+                    }
                 )
             }
         }

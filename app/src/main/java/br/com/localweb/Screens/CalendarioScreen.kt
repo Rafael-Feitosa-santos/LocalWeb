@@ -262,13 +262,7 @@ fun CalendarioScreen(navController: NavController) {
                 }
             )
 
-            AnimatedIcon(
-                icon = Icons.Default.Refresh,
-                contentDescription = "Refresh Icon",
-                selectedIcon = selectedIcon,
-                iconName = "refresh",
-                onClick = { selectedIcon = "refresh" }
-            )
+
         }
     }
 }
