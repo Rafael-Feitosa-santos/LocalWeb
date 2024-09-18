@@ -29,6 +29,7 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -70,14 +71,21 @@ fun CalendarioScreen(navController: NavController) {
     var selectedColor by remember { mutableStateOf(Color.Gray) } // Cor padrão
 
     // Lista de cores disponíveis
-    val colorOptions = listOf(Color.Red, Color.Green, Color.Blue, Color.Yellow, Color.Cyan, Color.Magenta)
-
-    var selectedIcon by remember { mutableStateOf("none") }
+// Lista de cores disponíveis
+    val colorOptions = listOf(
+        Color(0xFFE0E0E0), // Cinza Claro
+        Color(0xFFB0BEC5), // Cinza Azulado
+        Color(0xFF9E9E9E), // Cinza Médio
+        Color(0xFFBCAAA4), // Bege Claro
+        Color(0xFFCFD8DC), // Azul Claro
+        Color(0xFFF5F5F5)  // Branco Neve
+    )
+    var selectedIcon by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .background(colorResource(id = br.com.localweb.R.color.background_black))
+            .background(colorResource(id = br.com.localweb.R.color.vermelho))
             .height(90.dp),
     ) {
 
@@ -102,12 +110,17 @@ fun CalendarioScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(16.dp))
 
         // Botão para voltar ao dia atual
-        Button(onClick = {
-            // Voltar ao ano, mês e dia atuais
-            selectedYear = currentDate.year
-            selectedMonth = currentDate.monthValue
-            selectedDay = currentDate.dayOfMonth
-        }) {
+        Button(
+            onClick = {
+                // Atualiza o estado para refletir a data atual
+                selectedYear = currentDate.year
+                selectedMonth = currentDate.monthValue
+                selectedDay = currentDate.dayOfMonth
+            },
+            colors = ButtonDefaults.buttonColors(
+                colorResource(id = br.com.localweb.R.color.btn_vermelho)
+            )
+        ) {
             Text(text = "Ir para Hoje")
         }
 
@@ -181,7 +194,7 @@ fun CalendarioScreen(navController: NavController) {
 
         // Seletor de cores
         Text(text = "Selecione uma cor para o compromisso:")
-        Row(modifier = Modifier.padding(8.dp), horizontalArrangement = Arrangement.SpaceBetween) {
+        Row(modifier = Modifier.padding(8.dp), horizontalArrangement = Arrangement.Center) {
             colorOptions.forEach { color ->
                 Box(
                     modifier = Modifier
@@ -196,14 +209,19 @@ fun CalendarioScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(8.dp))
 
         // Botão para adicionar compromisso
-        Button(onClick = {
-            if (newAppointment.isNotBlank()) {
-                // Adicionar compromisso ao dia selecionado com a cor escolhida
-                val newEntry = Appointment(selectedDay, newAppointment, selectedColor)
-                appointments.computeIfAbsent(selectedDay) { mutableListOf() }.add(newEntry)
-                newAppointment = ""
-            }
-        }) {
+        Button(
+            onClick = {
+                if (newAppointment.isNotBlank()) {
+                    // Adicionar compromisso ao dia selecionado com a cor escolhida
+                    val newEntry = Appointment(selectedDay, newAppointment, selectedColor)
+                    appointments.computeIfAbsent(selectedDay) { mutableListOf() }.add(newEntry)
+                    newAppointment = ""
+                }
+            },
+            colors = ButtonDefaults.buttonColors(
+                colorResource(id = br.com.localweb.R.color.btn_vermelho)
+            )
+        )  {
             Text(text = "Adicionar Compromisso")
         }
     }
@@ -212,7 +230,7 @@ fun CalendarioScreen(navController: NavController) {
         modifier = Modifier
             .fillMaxWidth()
             .height(110.dp)
-            .background(colorResource(id = br.com.localweb.R.color.background_black))
+            .background(colorResource(id = br.com.localweb.R.color.vermelho))
             .offset(y = 15.dp),
         horizontalAlignment = Alignment.End,
         verticalArrangement = Arrangement.SpaceEvenly
@@ -231,7 +249,7 @@ fun CalendarioScreen(navController: NavController) {
                     navController.navigate("home")
                 },
 
-            )
+                )
 
             AnimatedIcon(
                 icon = Icons.Default.DateRange,
@@ -303,8 +321,8 @@ fun DayItem(day: Int, isSelected: Boolean, hasAppointments: Boolean, onClick: ()
             .clip(CircleShape)
             .background(
                 when {
-                    isSelected -> Color(0xFF8D6E99)
-                    hasAppointments -> Color(0xFFFFF176) // Cor para dias com compromissos
+                    isSelected -> Color.LightGray
+                    hasAppointments -> colorResource(id = br.com.localweb.R.color.vermelho) // Cor para dias com compromissos
                     else -> Color.Transparent
                 }
             )
@@ -385,4 +403,3 @@ fun ImageVector.AnimatedIcon(
         }
     }
 }
-

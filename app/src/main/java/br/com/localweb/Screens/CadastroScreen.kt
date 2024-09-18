@@ -49,15 +49,10 @@ fun CadastroScreen(navController: NavHostController) {
 
     var tamanhoCpf = 11
 
-    var tamanhoTel = 9
 
     var tamanhoSenha = 8
 
     var cpfState by remember {
-        mutableStateOf("")
-    }
-
-    var telState by remember {
         mutableStateOf("")
     }
 
@@ -85,7 +80,7 @@ fun CadastroScreen(navController: NavHostController) {
             modifier = Modifier
                 .size(width = 900.dp, height = 190.dp),
             colors = CardDefaults.cardColors(
-                containerColor = colorResource(id = br.com.localweb.R.color.background_black),
+                containerColor = colorResource(id = br.com.localweb.R.color.vermelho),
             ),
             shape = RoundedCornerShape(bottomEndPercent = 95),
         ) {
@@ -139,7 +134,7 @@ fun CadastroScreen(navController: NavHostController) {
                     Icon(
                         imageVector = Icons.Default.Person,
                         contentDescription = "Icone de Pessoa",
-                        tint = colorResource(id = br.com.localweb.R.color.icon_input)
+                        tint = colorResource(id = br.com.localweb.R.color.vermelho)
                     )
                 },
                 colors = OutlinedTextFieldDefaults.colors(
@@ -177,7 +172,7 @@ fun CadastroScreen(navController: NavHostController) {
                     Icon(
                         imageVector = Icons.Default.Email,
                         contentDescription = "Icone de E-mail",
-                        tint = colorResource(id = br.com.localweb.R.color.icon_input)
+                        tint = colorResource(id = br.com.localweb.R.color.vermelho)
                     )
                 },
                 colors = OutlinedTextFieldDefaults.colors(
@@ -216,7 +211,7 @@ fun CadastroScreen(navController: NavHostController) {
                     Icon(
                         imageVector = Icons.Default.Lock,
                         contentDescription = "Icone de Telefone",
-                        tint = colorResource(id = br.com.localweb.R.color.icon_input)
+                        tint = colorResource(id = br.com.localweb.R.color.vermelho)
                     )
                 },
                 colors = OutlinedTextFieldDefaults.colors(
@@ -251,7 +246,7 @@ fun CadastroScreen(navController: NavHostController) {
                     Icon(
                         imageVector = Icons.Default.Lock,
                         contentDescription = "Ícone Senha",
-                        tint = colorResource(id = br.com.localweb.R.color.icon_input)
+                        tint = colorResource(id = br.com.localweb.R.color.vermelho)
                     )
                 },
                 colors = OutlinedTextFieldDefaults.colors(
@@ -268,7 +263,7 @@ fun CadastroScreen(navController: NavHostController) {
 
             Button(
                 onClick = {
-                    isButtonPressedVoltar = !isButtonPressedVoltar  // Alterna o estado de clique
+                    isButtonPressedVoltar = !isButtonPressedVoltar
                     navController.navigate("confirmacao")
                 },
                 modifier = Modifier
@@ -280,15 +275,18 @@ fun CadastroScreen(navController: NavHostController) {
                     topEnd = 35.dp
                 ),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = if (isButtonPressedVoltar) Color.White else colorResource(id = br.com.localweb.R.color.color_botao)
+                    containerColor = if (isButtonPressedVoltar)
+                        Color.White else colorResource(id = br.com.localweb.R.color.btn_vermelho)
                 ),
-                border = BorderStroke(2.dp, if (isButtonPressedVoltar) colorResource(id = br.com.localweb.R.color.color_botao) else Color.Transparent)
+                border = BorderStroke(2.dp, if (isButtonPressedVoltar)
+                    colorResource(id = br.com.localweb.R.color.btn_vermelho) else Color.Transparent)
             ) {
                 Text(
                     text = "Próximo passo",
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold,
-                    color = if (isButtonPressedVoltar) colorResource(id = br.com.localweb.R.color.color_botao) else Color.White
+                    color = if (isButtonPressedVoltar)
+                        colorResource(id = br.com.localweb.R.color.btn_vermelho) else Color.White
                 )
             }
 

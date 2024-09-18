@@ -44,7 +44,7 @@ fun ConfirmacaoScreen(navController: NavController) {
 
     Box(
         modifier = Modifier
-            .background(colorResource(id = br.com.localweb.R.color.background_black))
+            .background(Color.White)
             .fillMaxWidth()
             .fillMaxSize()
     ) {
@@ -56,7 +56,7 @@ fun ConfirmacaoScreen(navController: NavController) {
         ) {
             Text(
                 text = "Muito bem!",
-                color = colorResource(id = br.com.localweb.R.color.color_botao),
+                color = colorResource(id = br.com.localweb.R.color.btn_vermelho),
                 fontSize = 33.sp,
                 fontWeight = FontWeight.Black
             )
@@ -69,7 +69,7 @@ fun ConfirmacaoScreen(navController: NavController) {
         ) {
             Text(
                 text = "\nAgora aceite os termos e condições abaixo ou clique no link que enviaremos ao seu e-mail.",
-                color = Color.White,
+                color = Color.Black,
                 fontSize = 20.sp,
                 textAlign = TextAlign.Left,
                 fontWeight = FontWeight.W400
@@ -84,7 +84,7 @@ fun ConfirmacaoScreen(navController: NavController) {
         ) {
             Text(
                 text = "Leia antes de seguir:",
-                color = Color.White,
+                color = Color.Black,
                 fontSize = 20.sp,
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.W400
@@ -113,7 +113,7 @@ fun ConfirmacaoScreen(navController: NavController) {
                     showError = !isChecked  // Se não estiver marcado, mostra o erro
                 },
                 colors = CheckboxDefaults.colors(
-                    checkedColor = Color.Green,
+                    checkedColor = colorResource(id = br.com.localweb.R.color.btn_vermelho),
                     uncheckedColor = Color.Gray
                 )
             )
@@ -121,7 +121,7 @@ fun ConfirmacaoScreen(navController: NavController) {
                 text = "Concordo com os Termos e Condições de Uso da ferramenta",
                 modifier = Modifier.padding(start = 8.dp),
                 fontSize = 16.sp,
-                color = Color.White
+                color = Color.Black
             )
         }
 
@@ -130,6 +130,7 @@ fun ConfirmacaoScreen(navController: NavController) {
                 text = "Você precisa concordar com os Termos para continuar.",
                 color = Color.Red,
                 fontSize = 14.sp,
+                fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(start = 40.dp)
             )
         }
@@ -143,7 +144,7 @@ fun ConfirmacaoScreen(navController: NavController) {
                     isEmailSmsChecked = isChecked
                 },
                 colors = CheckboxDefaults.colors(
-                    checkedColor = Color.Green,
+                    checkedColor = colorResource(id = br.com.localweb.R.color.btn_vermelho),
                     uncheckedColor = Color.Gray
                 )
             )
@@ -151,7 +152,7 @@ fun ConfirmacaoScreen(navController: NavController) {
                 text = "Concordo em receber comunicados e avisos por e-mail/sms",
                 modifier = Modifier.padding(start = 8.dp),
                 fontSize = 16.sp,
-                color = Color.White
+                color = Color.Black
             )
         }
 
@@ -170,16 +171,17 @@ fun ConfirmacaoScreen(navController: NavController) {
             ),
             colors = ButtonDefaults.buttonColors(
                 containerColor = if (isButtonPressed) Color.White else
-                    colorResource(id = br.com.localweb.R.color.color_botao)
+                    colorResource(id = br.com.localweb.R.color.btn_vermelho)
             ),
             border = BorderStroke(2.dp, if (isButtonPressed)
-                colorResource(id = R.color.color_botao) else Color.Transparent)
+                colorResource(id = R.color.btn_vermelho) else Color.Transparent)
         ) {
             Text(
                 text = "Criar Conta",
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
-                color = if (isButtonPressed) colorResource(id = br.com.localweb.R.color.color_botao) else Color.White
+                color = if (isButtonPressed)
+                    colorResource(id = br.com.localweb.R.color.btn_vermelho) else Color.White
             )
         }
 

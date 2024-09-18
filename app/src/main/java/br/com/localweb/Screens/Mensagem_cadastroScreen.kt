@@ -21,7 +21,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -34,22 +37,29 @@ fun Mensagem_CadastroScreen(navController: NavController) {
 
 
     Box(modifier = Modifier
-        .background(colorResource(id = br.com.localweb.R.color.background_black))
+        .background(Color.White)
         .fillMaxSize()
     ){
         Row(
             modifier = Modifier
                 .align(Alignment.TopCenter)
-                .offset(y = 220.dp)
+                .offset(y = 205.dp)
                 .padding(start = 22.dp)
         ) {
             Text(
-                text = "Parabéns!! \nSeu e-mail foi criado.",
-                color = Color.White,
+                text = buildAnnotatedString {
+                    withStyle(style = SpanStyle(color = colorResource(id = R.color.btn_vermelho))) {
+                        append("Parabéns!!\n")
+                    }
+                    withStyle(style = SpanStyle(color = Color.Black)) {
+                        append("Seu e-mail foi criado.")
+                    }
+                },
                 fontSize = 33.sp,
                 fontWeight = FontWeight.Black,
                 lineHeight = 55.sp
             )
+
         }
 
         Button(
@@ -66,16 +76,17 @@ fun Mensagem_CadastroScreen(navController: NavController) {
             ),
             colors = ButtonDefaults.buttonColors(
                 containerColor = if (isButtonPressed) Color.White else
-                    colorResource(id = br.com.localweb.R.color.color_botao)
+                    colorResource(id = br.com.localweb.R.color.btn_vermelho)
             ),
             border = BorderStroke(2.dp, if (isButtonPressed)
-                colorResource(id = R.color.color_botao) else Color.Transparent)
+                colorResource(id = R.color.btn_vermelho) else Color.Transparent)
         ) {
             Text(
                 text = "Sair",
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
-                color = if (isButtonPressed) colorResource(id = br.com.localweb.R.color.color_botao) else Color.White
+                color = if (isButtonPressed)
+                    colorResource(id = br.com.localweb.R.color.btn_vermelho) else Color.White
             )
         }
     }

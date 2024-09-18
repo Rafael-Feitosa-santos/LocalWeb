@@ -11,4 +11,6 @@
     <color name="color_botao">#00acc8</color>
     <color name="btn_vermelho">#d60037</color>
     <color name="icon_input">#f48f32</color>
+    <color name="vermelho">#F90F0F</color>
+
 </resources>

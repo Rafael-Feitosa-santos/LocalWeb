@@ -44,6 +44,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -82,7 +83,7 @@ fun LoginScreen(navController: NavController) {
             modifier = androidx.compose.ui.Modifier
                 .size(width = 900.dp, height = 150.dp),
             colors = CardDefaults.cardColors(
-                containerColor = colorResource(id = br.com.localweb.R.color.background_black),
+                containerColor = colorResource(id = br.com.localweb.R.color.vermelho),
             ),
             shape = RoundedCornerShape(
                 bottomEndPercent = 95
@@ -139,7 +140,7 @@ fun LoginScreen(navController: NavController) {
                     Icon(
                         imageVector = Icons.Default.Email,
                         contentDescription = "Icone de e-mail",
-                        tint = colorResource(id = br.com.localweb.R.color.icon_input)
+                        tint = colorResource(id = br.com.localweb.R.color.vermelho)
                     )
                 },
                 colors = OutlinedTextFieldDefaults.colors(
@@ -179,7 +180,7 @@ fun LoginScreen(navController: NavController) {
                     Icon(
                         imageVector = Icons.Default.Lock,
                         contentDescription = "Ícone de Bloqueio",
-                        tint = colorResource(id = br.com.localweb.R.color.icon_input)
+                        tint = colorResource(id = br.com.localweb.R.color.vermelho)
                     )
                 },
                 colors = OutlinedTextFieldDefaults.colors(
@@ -222,7 +223,7 @@ fun LoginScreen(navController: NavController) {
                 Spacer(modifier = androidx.compose.ui.Modifier.width(8.dp))
 
                 Text(
-                    text = "Lembrar dados",
+                    text = "Lembrar",
                     color = Color.Black,
                     fontWeight = FontWeight.Bold
                 )
@@ -230,33 +231,20 @@ fun LoginScreen(navController: NavController) {
                 Spacer(modifier = androidx.compose.ui.Modifier.width(16.dp))
 
 
-                Box(
-                    contentAlignment = Alignment.Center,
-                    modifier = Modifier
-                        .size(20.dp)
-                        .border(BorderStroke(2.dp, Color.Black))
-                        .background(Color.White)
-                        .clickable {
-                            rememberPassword = !rememberPassword
-                        }
-                ) {
-                    if (rememberPassword) {
-                        Icon(
-                            imageVector = Icons.Default.Check,
-                            contentDescription = "Checked",
-                            tint = Color.Black,
-                            modifier = Modifier.size(16.dp)
-                        )
-                    }
+                Column {
+                    Text(
+                        text = "Esqueceu a senha?",
+                        color = colorResource(id = br.com.localweb.R.color.btn_vermelho),
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(bottom = 2.dp)                     )
+                    Box(
+                        modifier = Modifier
+                            .height(2.dp)
+                            .width(150.dp)
+                            .background(colorResource
+                                (id = br.com.localweb.R.color.btn_vermelho))
+                    )
                 }
-
-                Spacer(modifier = androidx.compose.ui.Modifier.width(8.dp))
-
-                Text(
-                    text = "Lembrar a senha?",
-                    color = Color.Black,
-                    fontWeight = FontWeight.Bold
-                )
             }
 
 
@@ -276,22 +264,24 @@ fun LoginScreen(navController: NavController) {
                     topEnd = 35.dp
                 ),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = if (isButtonPressed) Color.White else colorResource(id = br.com.localweb.R.color.color_botao)
+                    containerColor = if (isButtonPressed)
+                        Color.White else colorResource(id = br.com.localweb.R.color.btn_vermelho)
                 ),
                 border = BorderStroke(
                     2.dp,
-                    if (isButtonPressed) colorResource(id = br.com.localweb.R.color.color_botao) else Color.Transparent
+                    if (isButtonPressed) colorResource(id = br.com.localweb.R.color.btn_vermelho) else Color.Transparent
                 )
             ) {
                 Text(
                     text = "ENTRAR ",
                     modifier = Modifier
-                        .padding(horizontal = 16.dp, vertical = 8.dp)
-                        .border(BorderStroke
-                            (2.dp, colorResource(id = br.com.localweb.R.color.color_botao))),
+                        .padding(horizontal = 16.dp, vertical = 8.dp),
+
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp,
-                    color = if (isButtonPressed) colorResource(id = br.com.localweb.R.color.color_botao) else Color.White  // Muda a cor do texto
+                    color = if (isButtonPressed)
+                        colorResource(id = br.com.localweb.R.color.btn_vermelho)
+                    else Color.White  // Muda a cor do texto
                 )
             }
             Row(
@@ -338,7 +328,7 @@ fun LoginScreen(navController: NavController) {
                     .fillMaxWidth(),
 
                 colors = CardDefaults.cardColors(
-                    containerColor = colorResource(id = br.com.localweb.R.color.background_black)
+                    containerColor = colorResource(id = br.com.localweb.R.color.vermelho)
                 ),
                 shape = RoundedCornerShape(
                     topStartPercent = 40,

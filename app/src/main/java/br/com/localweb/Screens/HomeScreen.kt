@@ -115,7 +115,7 @@ fun HomeScreen(navController: NavController) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(colorResource(id = br.com.localweb.R.color.background_black))
+                .background(colorResource(id = br.com.localweb.R.color.vermelho))
                 .height(90.dp),
         ) {
 
@@ -125,7 +125,7 @@ fun HomeScreen(navController: NavController) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(colorResource(id = br.com.localweb.R.color.background_black))
+                .background(colorResource(id = br.com.localweb.R.color.vermelho))
                 .align(Alignment.TopStart)
                 .offset(y = 129.dp)
         ) {
@@ -195,7 +195,7 @@ fun HomeScreen(navController: NavController) {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(110.dp)
-                .background(colorResource(id = br.com.localweb.R.color.background_black))
+                .background(colorResource(id = br.com.localweb.R.color.vermelho))
                 .align(Alignment.BottomStart),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
@@ -287,7 +287,7 @@ fun AnimatedIcon(
                 imageVector = icon,
                 contentDescription = contentDescription,
                 tint = if (isSelected)
-                    colorResource(id = br.com.localweb.R.color.color_botao) else Color.White,
+                    colorResource(id = br.com.localweb.R.color.btn_vermelho) else Color.White,
                 modifier = Modifier.size(40.dp)
             )
             Spacer(modifier = Modifier.height(4.dp))
@@ -295,7 +295,7 @@ fun AnimatedIcon(
                 modifier = Modifier
                     .height(2.dp)
                     .width(40.dp)
-                    .background(if (isSelected) colorResource(id = br.com.localweb.R.color.color_botao) else Color.Transparent)
+                    .background(if (isSelected) colorResource(id = br.com.localweb.R.color.btn_vermelho) else Color.Transparent)
             )
         }
     }
