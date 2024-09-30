@@ -2,6 +2,7 @@ package br.com.localweb.Screens
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -35,12 +36,10 @@ import br.com.localweb.R
 
 @Composable
 fun ConfirmacaoScreen(navController: NavController) {
-
     var isTermsChecked by remember { mutableStateOf(false) }
     var isEmailSmsChecked by remember { mutableStateOf(false) }
     var showError by remember { mutableStateOf(false) }
     var isButtonPressed by remember { mutableStateOf(false) }
-
 
     Box(
         modifier = Modifier
@@ -90,10 +89,7 @@ fun ConfirmacaoScreen(navController: NavController) {
                 fontWeight = FontWeight.W400
             )
         }
-
-
     }
-
 
     Column(
         verticalArrangement = Arrangement.Center,
@@ -102,6 +98,7 @@ fun ConfirmacaoScreen(navController: NavController) {
             .padding(32.dp)
             .offset(y = 370.dp)
     ) {
+        // Checkbox para os Termos e Condições
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.padding(bottom = 16.dp)
@@ -110,7 +107,7 @@ fun ConfirmacaoScreen(navController: NavController) {
                 checked = isTermsChecked,
                 onCheckedChange = { isChecked ->
                     isTermsChecked = isChecked
-                    showError = !isChecked  // Se não estiver marcado, mostra o erro
+                    showError = !isChecked // Se não estiver marcado, mostra o erro
                 },
                 colors = CheckboxDefaults.colors(
                     checkedColor = colorResource(id = br.com.localweb.R.color.btn_vermelho),
@@ -119,7 +116,12 @@ fun ConfirmacaoScreen(navController: NavController) {
             )
             Text(
                 text = "Concordo com os Termos e Condições de Uso da ferramenta",
-                modifier = Modifier.padding(start = 8.dp),
+                modifier = Modifier
+                    .padding(start = 8.dp)
+                    .clickable { // Adiciona a funcionalidade de clique no texto
+                        isTermsChecked = !isTermsChecked
+                        showError = !isTermsChecked // Atualiza o estado do erro
+                    },
                 fontSize = 16.sp,
                 color = Color.Black
             )
@@ -135,6 +137,7 @@ fun ConfirmacaoScreen(navController: NavController) {
             )
         }
 
+        // Checkbox para Email/SMS
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -150,17 +153,23 @@ fun ConfirmacaoScreen(navController: NavController) {
             )
             Text(
                 text = "Concordo em receber comunicados e avisos por e-mail/sms",
-                modifier = Modifier.padding(start = 8.dp),
+                modifier = Modifier
+                    .padding(start = 8.dp)
+                    .clickable { // Adiciona a funcionalidade de clique no texto
+                        isEmailSmsChecked = !isEmailSmsChecked
+                    },
                 fontSize = 16.sp,
                 color = Color.Black
             )
         }
 
+        // Botão de Criar Conta
         Button(
             onClick = {
                 isButtonPressed = !isButtonPressed
                 navController.navigate("mensagem")
             },
+            enabled = isTermsChecked, // O botão só é habilitado se os termos forem aceitos
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
                 .width(290.dp)
@@ -170,8 +179,9 @@ fun ConfirmacaoScreen(navController: NavController) {
                 topEnd = 35.dp
             ),
             colors = ButtonDefaults.buttonColors(
-                containerColor = if (isButtonPressed) Color.White else
+                containerColor = if (isTermsChecked)
                     colorResource(id = br.com.localweb.R.color.btn_vermelho)
+                else Color.Gray // Cor do botão desabilitado
             ),
             border = BorderStroke(2.dp, if (isButtonPressed)
                 colorResource(id = R.color.btn_vermelho) else Color.Transparent)
@@ -184,6 +194,5 @@ fun ConfirmacaoScreen(navController: NavController) {
                     colorResource(id = br.com.localweb.R.color.btn_vermelho) else Color.White
             )
         }
-
     }
 }
