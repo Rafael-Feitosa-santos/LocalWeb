@@ -254,6 +254,7 @@ fun LoginScreen(navController: NavController) {
                     isButtonPressed = !isButtonPressed
                     navController.navigate("home")
                 },
+                enabled = usuarioState.isNotEmpty() && senhaState.isNotEmpty(),  // Habilita o botão se os campos não estiverem vazios
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
                     .width(290.dp)
@@ -275,7 +276,6 @@ fun LoginScreen(navController: NavController) {
                     text = "ENTRAR ",
                     modifier = Modifier
                         .padding(horizontal = 16.dp, vertical = 8.dp),
-
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp,
                     color = if (isButtonPressed)
@@ -283,6 +283,7 @@ fun LoginScreen(navController: NavController) {
                     else Color.White  // Muda a cor do texto
                 )
             }
+
             Row(
                 modifier = androidx.compose.ui.Modifier
                     .align(Alignment.CenterHorizontally)
